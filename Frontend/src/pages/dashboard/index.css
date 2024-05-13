@@ -1,0 +1,27 @@
+/* index.css */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150vh;
+  font-family: Arial, sans-serif;
+}
+
+.react-calendar {
+  width: 800px !important; /* Adjust the width to make the calendar bigger */
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 auto; /* Add this line to center the calendar horizontally */
+}
+
+/* Add other styles as needed */
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+.react-calendar__navigation__prev2-button {
+  display: none;
+}
+.react-calendar__tile--now {
+  order: 1; /* Move the "Today" button to the bottom */
+}

@@ -1,19 +1,13 @@
-.rs-calendar-header-title {
-  pointer-events: none;
-}
-.container {
-  display: flex;
-  justify-content: flex-end;
-  height: 100%; /* Optional, depending on your layout */
-}
 
-.calendar-wrapper {
-  width: 700px;
-  height: 900px;
-  margin-left: auto; /* ขยับไปทางขวา */
-}
-/* Target only buttons with both classes rs-calendar-btn-today and rs-btn */
-.rs-calendar-btn-today.rs-btn {
-  color: rgb(21, 0, 255);
+
+.modal-content {
+  /* Modal content styles */
+  /* set center */
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 550px;
+
 }
 

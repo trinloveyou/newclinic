@@ -8,8 +8,12 @@
 }
 
 .calendar-wrapper {
-  width: 600px;
-  height: 400px;
+  width: 700px;
+  height: 900px;
   margin-left: auto; /* ขยับไปทางขวา */
+}
+/* Target only buttons with both classes rs-calendar-btn-today and rs-btn */
+.rs-calendar-btn-today.rs-btn {
+  color: rgb(21, 0, 255);
 }
 

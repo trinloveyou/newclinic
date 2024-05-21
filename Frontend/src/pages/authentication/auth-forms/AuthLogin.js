@@ -15,8 +15,7 @@ import {
   InputLabel,
   OutlinedInput,
   Stack,
-  Typography,
-  Divider
+  Typography
 } from '@mui/material';
 
 // third party
@@ -25,7 +24,7 @@ import { Formik } from 'formik';
 
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
-import FirebaseSocial from './FirebaseSocial';
+
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -176,12 +175,8 @@ const AuthLogin = () => {
                   </AnimateButton>
               </Grid>
               <Grid item xs={12}>
-                <Divider>
-                  <Typography variant="caption"> Login with</Typography>
-                </Divider>
               </Grid>
               <Grid item xs={12}>
-                <FirebaseSocial />
               </Grid>
             </Grid>
           </form>

@@ -1,5 +1,5 @@
 
-import logo from 'assets/images/catdog.png';
+import logo from 'assets/images/logoclinic.png';
 
 
 
@@ -7,7 +7,7 @@ const Logo = () => {
 
   return (
 
-     <img src={logo} alt="Mantis" width="100" />
+     <img src={logo} alt="Mantis" width="200" />
    
   );
 };

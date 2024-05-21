@@ -94,7 +94,7 @@ const AuthRegister = () => {
                     name="name"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="John"
+                    placeholder="สิรวิชญ์ คำชุ่ม"
                     
                     error={Boolean(touched.name && errors.name)}
                   />
@@ -108,7 +108,7 @@ const AuthRegister = () => {
               
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="numphone">numphone</InputLabel>
+                  <InputLabel htmlFor="numphone">Numphone</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.numphone && errors.numphone)}
@@ -117,7 +117,7 @@ const AuthRegister = () => {
                     name="numphone"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Demo Inc."
+                    placeholder="0895636594"
                     inputProps={{}}
                   />
                   {touched.numphone && errors.numphone && (

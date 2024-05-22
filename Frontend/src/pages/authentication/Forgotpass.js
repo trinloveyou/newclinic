@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link as RouterLink } from 'react-router-dom'; // นำเข้า Link จาก React Router
-import { Container, Typography, TextField, Button, Snackbar, CircularProgress, Alert, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Container, Typography, TextField, Button, Snackbar, CircularProgress, Alert} from '@mui/material';
 
 const AuthForgotpass = () => {
   const [email, setEmail] = useState('');
@@ -60,14 +60,16 @@ const AuthForgotpass = () => {
           {error || message}
         </Alert>
       </Snackbar>
-      {/* เพิ่ม Link ไปยังหน้า Forgot Password */}
-      <Container maxWidth="sm" style={{ marginTop: '50px', display: 'flex', justifyContent: 'space-between' }}>
-        <Typography variant="h4" gutterBottom align="center"></Typography>
-        <div>
-          <Link variant="h1" component={RouterLink} to="/Login" color="text.primary" style={{ fontSize: 15 }}>
-            Login
-          </Link>
-        </div>
+      <Container maxWidth="sm" style={{ marginTop: '50px', display: 'flex', justifyContent: 'center' }}>
+        <Button
+          component={RouterLink}
+          to="/Login"
+          variant="contained"
+          color="primary"
+          style={{ fontSize: 15 }}
+        >
+          Login
+        </Button>
       </Container>
     </Container>
   );

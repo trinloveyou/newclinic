@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import Editpassword from 'layout/MainLayout/Header/HeaderContent/Profile/Editpassword';
+import Viewprofile from 'layout/MainLayout/Header/HeaderContent/Profile/Viewprofile';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -64,7 +65,11 @@ const MainRoutes = {
     {
       path: 'edit_password',
       element: <Editpassword/>
-    }
+    },
+    {
+      path: '/view_profile',
+      element: <Viewprofile/>
+    },
   ]
 };
 

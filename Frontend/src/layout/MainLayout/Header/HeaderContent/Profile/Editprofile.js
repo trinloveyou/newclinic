@@ -26,6 +26,12 @@ const EditProfile = () => {
         margin="normal"
         fullWidth
       />
+            <TextField
+        label="Phone Number"
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
       <Button
         variant="contained"
         color="primary"

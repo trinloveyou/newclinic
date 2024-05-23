@@ -20,14 +20,15 @@ const ProfileTab = ({ handleLogout }) => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-
-
-    // นำทางไปยังหน้า Edit Profile เมื่อคลิก
     if (index === 0) {
+      navigate('/view_profile')
+    }
+    // นำทางไปยังหน้า Edit Profile เมื่อคลิก
+    if (index === 1) {
       navigate('/edit_profile')
     }
         // นำทางไปยังหน้า Edit Password เมื่อคลิก
-        if (index === 1) {
+        if (index === 2) {
           navigate('/edit_password')
         }
   };
@@ -36,23 +37,23 @@ const ProfileTab = ({ handleLogout }) => {
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
       <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
         <ListItemIcon>
+          <UserOutlined />
+        </ListItemIcon>
+        <ListItemText primary="View Profile" />
+      </ListItemButton>
+      <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
+        <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
         <ListItemText primary="Edit Profile" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
+      <ListItemButton selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
         <ListItemIcon>
           <KeyOutlined />
         </ListItemIcon>
         <ListItemText primary="Edit Password" />
       </ListItemButton>
-      <ListItemButton selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
-        <ListItemIcon>
-          <UserOutlined />
-        </ListItemIcon>
-        <ListItemText primary="View Profile" />
-      </ListItemButton>
-
+      
 
 
       <ListItemButton selected={selectedIndex === 3} onClick={handleLogout}>

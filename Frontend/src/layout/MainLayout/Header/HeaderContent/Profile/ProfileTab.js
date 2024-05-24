@@ -15,7 +15,7 @@ const ProfileTab = ({ handleLogout }) => {
   const theme = useTheme();
   const navigate = useNavigate(); // ใช้ useNavigate
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);

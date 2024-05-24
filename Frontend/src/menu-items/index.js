@@ -2,7 +2,7 @@
 import pages from './pages';
 import dashboard from './dashboard';
 import utilities from './utilities';
-import dashboarduser from './dashboarduser';
+import dashboarduser from './Dashboarduser';
 
 // ==============================|| MENU ITEMS ||============================== //
 

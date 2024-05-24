@@ -8,6 +8,12 @@
   height: 550px;
 
 }
+/* index.css */
+.rs-calendar-table-cell-disabled .rs-calendar-table-cell-date {
+  color: gray !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+}
 
 
 

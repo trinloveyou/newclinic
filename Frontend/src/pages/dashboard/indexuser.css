@@ -1,23 +1,55 @@
+.modal-content {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center; /* ปรับให้ Modal อยู่ชิดครึ่งกลางฝั่งขวา */
+  align-items: center;
+  height: 550px;
+  margin-left: auto; /* ชิดครึ่งกลางฝั่งขวา */
+  margin-right: auto; /* ชิดครึ่งกลางฝั่งขวา */
+}
+
+/* index.css */
+.rs-calendar-table-cell-disabled .rs-calendar-table-cell-date {
+  color: gray !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+}
 .container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .calendar-wrapper {
-    margin-bottom: 20px;
-  }
-  
-  .modal-wrapper {
-    width: 100%;
-  }
-  
+  max-width: 600px; /* ปรับขนาดของคอนเทนเนอร์ */
+  margin: 0 auto;
+}
+
+.calendar-wrapper {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: calc(100% - 20px); /* ปรับขนาดขององค์ประกอบ input, select, textarea */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 80px; /* ปรับความสูงของ textarea */
+}
+
+.modal-dialog {
+  max-width: 400px; /* ปรับขนาดของโมดัล */
+}
+
+.modal-body {
+  text-align: center;
+  justify-content: center;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+
+
+

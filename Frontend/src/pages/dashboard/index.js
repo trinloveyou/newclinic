@@ -51,7 +51,11 @@ export default function App() {
   return (
     <div className="container">
       <div className="calendar-wrapper">
-        <Calendar bordered onSelect={handleDateSelect} />
+        <Calendar 
+          bordered 
+          onSelect={handleDateSelect} 
+          disabledDate={date => date < new Date(new Date().setHours(0, 0, 0, 0))}
+        />
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

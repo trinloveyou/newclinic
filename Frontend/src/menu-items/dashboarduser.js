@@ -8,7 +8,7 @@ const icons = {
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
 
-const dashboarduser = {
+const Dashboarduser = {
   id: 'group-dashboard',
   title: 'Navigation',
   type: 'group',
@@ -17,11 +17,11 @@ const dashboarduser = {
       id: 'dashboarduser',
       title: 'Dashboarduser',
       type: 'item',
-      url: 'src/pages/dashboard/indexuser',
+      url: '/indexuser',
       icon: icons.CalendarOutlined,
       breadcrumbs: false
     },
   ]
 };
 
-export default dashboarduser;
+export default Dashboarduser;

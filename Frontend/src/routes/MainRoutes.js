@@ -10,6 +10,7 @@ import Viewprofile from 'layout/MainLayout/Header/HeaderContent/Profile/Viewprof
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // render - sample page
+
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
 // render - utilities
@@ -18,6 +19,7 @@ const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const Editprofile = Loadable(lazy(() => import('layout/MainLayout/Header/HeaderContent/Profile/Editprofile.js')));
+const Dashboarduser = Loadable(lazy(() => import('pages/dashboard/indexuser.js')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -69,6 +71,10 @@ const MainRoutes = {
     {
       path: '/view_profile',
       element: <Viewprofile/>
+    },
+    {
+      path: '/indexuser',
+      element: <Dashboarduser/>
     },
   ]
 };

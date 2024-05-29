@@ -1,31 +1,25 @@
 .main-container {
   display: flex;
-  justify-content: space-between; /* Adjust to space elements evenly */
+  justify-content: space-between;
   padding: 20px;
 }
 
 .left-container {
-  width: 45%; /* Adjust the width as needed */
+  flex: 1; /* Take up half of the available space */
   padding: 20px;
-  background-color: #f0f0f0; /* Optional: Add a background color for better visibility */
-  border-radius: 4px; /* Distribute space between items */
+  background-color: #f0f0f0;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  height: 1000px; /* กำหนดความสูงเต็มหน้าจอ */
-}
-
-.left-button {
-  align-self: flex-end; /* Align the button to the end */
 }
 
 .right-container {
-  width: 45%; /* Adjust the width as needed */
-  display: flex;
-  justify-content: flex-end;
+  flex: 1; /* Take up half of the available space */
+  padding: 20px;
 }
 
 .calendar-wrapper {
-  width: 100%;
+  width: 100%; /* Fill the available space */
 }
 
 .form-container {
@@ -54,7 +48,7 @@ textarea {
   text-align: center;
 }
 
-.modal-title {
+.Modal.Title {
   text-align: center;
 }
 
@@ -63,26 +57,42 @@ textarea {
   cursor: not-allowed !important;
   text-decoration: line-through;
 }
-.buttonAdd {
-  background-color: grey; /* Green */
-  border: none;
-  padding: 15px 32px;
-  text-align: hidden;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 8px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-.buttonsave {
-  background-color: #4CAF50; /* Green */
+
+.buttonAdd, .buttonsave {
+  background-color: gray;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  font-size: 8px;
-  margin: 4px 2px;
+  border-radius: 4px;
   cursor: pointer;
-  justify-content: end;
+  margin-top: 10px;
+}
+
+.buttonRemove {
+  background-color: #f44336;
+}
+
+.time-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.time-picker-container .buttonRemove {
+  margin-left: auto;
+}
+.buttonRemove {
+  border: none;
+  background: none; /* Remove background */
+  padding: 0; /* Remove padding */
+  color: #f70404;
+}
+
+.buttonRemove svg {
+  display: block; /* Ensure SVG takes up the full space */
+}
+.modal-content {
+margin-top: 100px;
 }

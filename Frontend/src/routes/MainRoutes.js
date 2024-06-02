@@ -10,9 +10,9 @@ import Viewprofile from 'layout/MainLayout/Header/HeaderContent/Profile/Viewprof
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // render - sample page
-
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
-
+const Historybooking = Loadable(lazy(() => import('pages/components-overview/Historybooking')));
+const Booking = Loadable(lazy(() => import('pages/components-overview/Booking')));
 // render - utilities
 const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
 const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
@@ -62,20 +62,28 @@ const MainRoutes = {
     },
     {
       path: 'edit_profile',
-      element: <Editprofile/>
+      element: <Editprofile />
     },
     {
       path: 'edit_password',
-      element: <Editpassword/>
+      element: <Editpassword />
     },
     {
       path: '/view_profile',
-      element: <Viewprofile/>
+      element: <Viewprofile />
     },
     {
       path: '/indexuser',
-      element: <Dashboarduser/>
+      element: <Dashboarduser />
     },
+    {
+      path: '/Historybooking',
+      element: <Historybooking />
+    },
+    {
+      path: '/Booking',
+      element: <Booking />
+    }
   ]
 };
 

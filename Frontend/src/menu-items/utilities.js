@@ -5,7 +5,9 @@ import {
   BarcodeOutlined,
   BgColorsOutlined,
   FontSizeOutlined,
-  LoadingOutlined
+  LoadingOutlined,
+  BookOutlined,
+  SolutionOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -15,7 +17,9 @@ const icons = {
   BarcodeOutlined,
   AntDesignOutlined,
   LoadingOutlined,
-  AppstoreAddOutlined
+  AppstoreAddOutlined,
+  BookOutlined,
+  SolutionOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -53,8 +57,21 @@ const utilities = {
       url: '/icons/ant',
       icon: icons.AntDesignOutlined,
       breadcrumbs: false
+    },
+    {
+      id: 'history-booking',
+      title: 'History Booking',
+      type: 'item',
+      url: '/Historybooking',
+      icon: icons.BookOutlined
+    },
+    {
+      id: 'booking',
+      title: 'Booking',
+      type: 'item',
+      url: '/Booking',
+      icon: icons.SolutionOutlined
     }
   ]
 };
-
 export default utilities;

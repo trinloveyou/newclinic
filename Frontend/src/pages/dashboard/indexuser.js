@@ -16,8 +16,8 @@ export default function App() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [timePickers, setTimePickers] = useState([{ open: dayjs('2022-04-17T15:30'), close: dayjs('2022-04-17T15:30') }]);
-  const [savedTime, setSavedTime] = useState([]);
-
+  const [savedTime] = useState([]);
+  //setSavedTime
   function handleDateSelect(date) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -50,16 +50,17 @@ export default function App() {
     setTimePickers(newTimePickers);
   }
   function handleSaveButtonClick() {
-    if (selectedDate) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const selected = new Date(selectedDate);
-      selected.setHours(0, 0, 0, 0);
-      if (selected >= today) {
-        setSavedTime(timePickers);
-      }
-    }
-    setShowModal(false);
+    //   if (selectedDate) {
+    //     const today = new Date();
+    //     today.setHours(0, 0, 0, 0);
+    //     const selected = new Date(selectedDate);
+    //     selected.setHours(0, 0, 0, 0);
+    //     if (selected >= today) {
+    //       setSavedTime(timePickers);
+    //     }
+    //   }
+    //   setShowModal(false);
+    console.log(selectedDate);
   }
 
   return (

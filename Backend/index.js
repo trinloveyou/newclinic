@@ -230,3 +230,51 @@ app.put("/api/editprofile", async (req, res) => {
     });
   }
 });
+
+// edit password
+app.put("/api/editpassword", async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  try {
+    const authHeader = req.headers["authorization"];
+    let authToken = "";
+    if (authHeader) {
+      authToken = authHeader.split(" ")[1];
+    }
+    const user = jwt.verify(authToken, secret);
+
+    const [checkResults] = await conn.query(
+      "SELECT * FROM users where email = ?",
+      user.email
+    );
+    console.log("checkResults", checkResults);
+
+    if (!checkResults[0]) {
+      throw { message: "user not found" };
+    }
+
+    const match = await bcrypt.compare(
+      currentPassword,
+      checkResults[0].password
+    );
+
+    if (!match) {
+      return res.status(400).send({ message: "Invalid current password" });
+    }
+
+    const hash = await bcrypt.hash(newPassword, 10);
+
+    const [results] = await conn.query(
+      "UPDATE users SET password = ? WHERE email = ?",
+      [hash, user.email]
+    );
+    res.json({
+      message: "edit password success",
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(403).json({
+      message: "Authention fail",
+      error,
+    });
+  }
+});

@@ -36,20 +36,20 @@ const ProfileTab = ({ handleLogout }) => {
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
+        <ListItemText primary="แก้ไขข้อมูลส่วนตัว" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
         <ListItemIcon>
           <KeyOutlined />
         </ListItemIcon>
-        <ListItemText primary="Edit Password" />
+        <ListItemText primary="แก้ไขรหัสผ่าน" />
       </ListItemButton>
 
       <ListItemButton selected={selectedIndex === 3} onClick={handleLogout}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
-        <ListItemText primary="Logout" />
+        <ListItemText primary="ออกจากระบบ" />
       </ListItemButton>
     </List>
   );

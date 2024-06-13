@@ -25,7 +25,6 @@ import { Formik } from 'formik';
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
 
-
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
@@ -42,7 +41,7 @@ const AuthLogin = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
- 
+
   return (
     <>
       <Formik
@@ -61,12 +60,14 @@ const AuthLogin = () => {
               email: values.email,
               password: values.password
             });
-        
+
             // Check if the response status is OK (200)
             if (response.status === 200) {
-              // Redirect to main page or perform any action for successful login
-              console.log("Login successful");
-              // Perform redirection to main page or other actions
+              // redirec to the dashboard
+              // save token to local storage
+              localStorage.setItem('token', response.data.token);
+
+              window.location.href = '/free/dashboard/default';
             }
           } catch (err) {
             // Handle error
@@ -75,14 +76,12 @@ const AuthLogin = () => {
               setErrors({ submit: err.response.data.message });
             } else {
               // For other errors, set a generic error message
-              setErrors({ submit: "An error occurred. Please try again." });
+              setErrors({ submit: 'An error occurred. Please try again.' });
             }
           }
           // Set submitting to false after handling the submission
           setSubmitting(false);
         }}
-        
-        
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>
@@ -172,12 +171,10 @@ const AuthLogin = () => {
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
                     Login
                   </Button>
-                  </AnimateButton>
+                </AnimateButton>
               </Grid>
-              <Grid item xs={12}>
-              </Grid>
-              <Grid item xs={12}>
-              </Grid>
+              <Grid item xs={12}></Grid>
+              <Grid item xs={12}></Grid>
             </Grid>
           </form>
         )}
@@ -185,6 +182,5 @@ const AuthLogin = () => {
     </>
   );
 };
-
 
 export default AuthLogin;

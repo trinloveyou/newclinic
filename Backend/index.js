@@ -41,10 +41,6 @@ const initMySQL = async () => {
   });
 };
 
-app.get("/hello", (req, res) => {
-  res.json({ data: "Hello World" });
-});
-
 app.post("/api/register", async (req, res) => {
   const { name, numphone, email, password } = req.body;
 
@@ -61,6 +57,7 @@ app.post("/api/register", async (req, res) => {
     numphone,
     email,
     password: hash,
+    role: 1,
   };
 
   try {
@@ -153,4 +150,83 @@ app.get("/api/users/:id", async (req, res) => {
 app.listen(port, async () => {
   await initMySQL();
   console.log("Server started at port 8000");
+});
+
+// make api to get data from database
+app.get("/api/users", async (req, res) => {
+  const [results] = await conn.query("SELECT * FROM users");
+  res.json({ clinic: results });
+});
+
+// get only user that login with token
+app.get("/api/usertoken", async (req, res) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    let authToken = "";
+    if (authHeader) {
+      authToken = authHeader.split(" ")[1];
+    }
+    console.log("authToken", authToken);
+    const user = jwt.verify(authToken, secret);
+
+    const [checkResults] = await conn.query(
+      "SELECT * FROM users where email = ?",
+      user.email
+    );
+
+    if (!checkResults[0]) {
+      throw { message: "user not found" };
+    }
+
+    const [results] = await conn.query(
+      "SELECT name , numphone , email , role FROM users where email = ?",
+      user.email
+    );
+    res.json({
+      users: results,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(403).json({
+      message: "Authention fail",
+      error,
+    });
+  }
+});
+
+// edit profile
+app.put("/api/editprofile", async (req, res) => {
+  const { name, email, numphone } = req.body;
+  try {
+    const authHeader = req.headers["authorization"];
+    let authToken = "";
+    if (authHeader) {
+      authToken = authHeader.split(" ")[1];
+    }
+    console.log("authToken", authToken);
+    const user = jwt.verify(authToken, secret);
+
+    const [checkResults] = await conn.query(
+      "SELECT * FROM users where email = ?",
+      user.email
+    );
+
+    if (!checkResults[0]) {
+      throw { message: "user not found" };
+    }
+
+    const [results] = await conn.query(
+      "UPDATE users SET name = ? , email = ? , numphone = ? WHERE email = ?",
+      [name, email, numphone, user.email]
+    );
+    res.json({
+      message: "edit profile success",
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(403).json({
+      message: "Authention fail",
+      error,
+    });
+  }
 });

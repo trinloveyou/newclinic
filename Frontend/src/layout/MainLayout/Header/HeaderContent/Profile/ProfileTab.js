@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 // assets
-import { EditOutlined, LogoutOutlined, UserOutlined , KeyOutlined} from '@ant-design/icons';
+import { EditOutlined, LogoutOutlined, KeyOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
@@ -20,27 +20,18 @@ const ProfileTab = ({ handleLogout }) => {
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
 
-    if (index === 0) {
-      navigate('/view_profile')
-    }
     // นำทางไปยังหน้า Edit Profile เมื่อคลิก
     if (index === 1) {
-      navigate('/edit_profile')
+      navigate('/edit_profile');
     }
-        // นำทางไปยังหน้า Edit Password เมื่อคลิก
-        if (index === 2) {
-          navigate('/edit_password')
-        }
+    // นำทางไปยังหน้า Edit Password เมื่อคลิก
+    if (index === 2) {
+      navigate('/edit_password');
+    }
   };
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32, color: theme.palette.grey[500] } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
-        <ListItemIcon>
-          <UserOutlined />
-        </ListItemIcon>
-        <ListItemText primary="View Profile" />
-      </ListItemButton>
       <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
         <ListItemIcon>
           <EditOutlined />
@@ -53,8 +44,6 @@ const ProfileTab = ({ handleLogout }) => {
         </ListItemIcon>
         <ListItemText primary="Edit Password" />
       </ListItemButton>
-      
-
 
       <ListItemButton selected={selectedIndex === 3} onClick={handleLogout}>
         <ListItemIcon>
@@ -71,5 +60,3 @@ ProfileTab.propTypes = {
 };
 
 export default ProfileTab;
-
-

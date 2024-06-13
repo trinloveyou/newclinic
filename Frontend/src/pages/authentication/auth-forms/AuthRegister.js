@@ -1,20 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios'; // Import Axios
 
 // material-ui
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  Stack,
-  Typography
-} from '@mui/material';
+import { Button, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack } from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -22,7 +10,6 @@ import { Formik } from 'formik';
 
 // project import
 import AnimateButton from 'components/@extended/AnimateButton';
-import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -30,7 +17,6 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 // ============================|| FIREBASE - REGISTER ||============================ //
 
 const AuthRegister = () => {
-  const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -40,15 +26,6 @@ const AuthRegister = () => {
     event.preventDefault();
   };
 
-  const changePassword = (value) => {
-    const temp = strengthIndicator(value);
-    setLevel(strengthColor(temp));
-  };
-
-  useEffect(() => {
-    changePassword('');
-  }, []);
-
   return (
     <>
       <Formik
@@ -57,19 +34,26 @@ const AuthRegister = () => {
           numphone: '',
           email: '',
           password: '',
+          confirmPassword: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().max(255).required('Name is required'),
+          numphone: Yup.string().max(10).required('Phone number is required'),
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          password: Yup.string().max(255).required('Password is required')
+          password: Yup.string().max(255).required('Password is required'),
+          confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .required('Confirm password is required')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             // Make POST request to your API endpoint
             const response = await axios.post('http://localhost:8000/api/register', values);
-
-            console.log('Registration successful', response.data);
+            // redirect to login page
+            if (response.status === 201) {
+              window.location.href = '/free/login';
+            }
             setStatus({ success: true });
             setSubmitting(false);
           } catch (err) {
@@ -87,7 +71,7 @@ const AuthRegister = () => {
                 <Stack spacing={1}>
                   <InputLabel htmlFor="name-signup"> Name</InputLabel>
                   <OutlinedInput
-                  fullWidth
+                    fullWidth
                     id="name-login"
                     type="name"
                     value={values.name}
@@ -95,7 +79,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="สิรวิชญ์ คำชุ่ม"
-                    
                     error={Boolean(touched.name && errors.name)}
                   />
                   {touched.name && errors.name && (
@@ -105,10 +88,10 @@ const AuthRegister = () => {
                   )}
                 </Stack>
               </Grid>
-              
+
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="numphone">Numphone</InputLabel>
+                  <InputLabel htmlFor="numphone-signup">Phone Number</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.numphone && errors.numphone)}
@@ -162,7 +145,6 @@ const AuthRegister = () => {
                     onBlur={handleBlur}
                     onChange={(e) => {
                       handleChange(e);
-                      changePassword(e.target.value);
                     }}
                     endAdornment={
                       <InputAdornment position="end">
@@ -186,18 +168,42 @@ const AuthRegister = () => {
                     </FormHelperText>
                   )}
                 </Stack>
-                <FormControl fullWidth sx={{ mt: 2 }}>
-                  <Grid container spacing={2} alignItems="center">
-                    <Grid item>
-                      <Box sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }} />
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="subtitle1" fontSize="0.75rem">
-                        {level?.label}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Stack spacing={1}>
+                  <InputLabel htmlFor="confirm-password-signup">Confirm Password</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                    id="confirm-password-signup"
+                    type={showPassword ? 'text' : 'password'}
+                    value={values.confirmPassword}
+                    name="confirmPassword"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                          size="large"
+                        >
+                          {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    placeholder="******"
+                    inputProps={{}}
+                  />
+                  {touched.confirmPassword && errors.confirmPassword && (
+                    <FormHelperText error id="helper-text-confirm-password-signup">
+                      {errors.confirmPassword}
+                    </FormHelperText>
+                  )}
+                </Stack>
               </Grid>
 
               {errors.submit && (
@@ -212,7 +218,6 @@ const AuthRegister = () => {
                   </Button>
                 </AnimateButton>
               </Grid>
-             
             </Grid>
           </form>
         )}

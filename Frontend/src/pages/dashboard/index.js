@@ -6,6 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 export default function App() {
+  // Get token from local storage
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = '/login';
+  }
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState('');
@@ -16,17 +22,14 @@ export default function App() {
 
   // Function to handle date selection
   function handleDateSelect(date) {
-    // Get the current date without time
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+    today.setHours(0, 0, 0, 0);
 
-    // Get the selected date without time
     const selectedDate = new Date(date);
-    selectedDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+    selectedDate.setHours(0, 0, 0, 0);
 
-    // Check if the selected date is after today
     if (selectedDate.getTime() < today.getTime()) {
-      return; // Do nothing if the selected date is after today
+      return;
     }
 
     setSelectedDate(selectedDate);
@@ -34,12 +37,18 @@ export default function App() {
   }
 
   function handleSubmit() {
-    // Here you can handle form submission, for now, let's just close the modal
-    setShowModal(false);
+    // Perform form submission logic here
+    if (name && phone && petName && purpose) {
+      // Example: console.log form data
+      console.log({ name, phone, petName, purpose, note, date: selectedDate });
+
+      setShowModal(false);
+    } else {
+      alert('กรุณากรอกข้อมูลที่จำเป็นทั้งหมด');
+    }
   }
 
   function handleClose() {
-    // Reset form fields when modal is closed
     setName('');
     setPhone('');
     setPetName('');
@@ -51,11 +60,7 @@ export default function App() {
   return (
     <div className="container">
       <div className="calendar-wrapper">
-        <Calendar 
-          bordered 
-          onSelect={handleDateSelect} 
-          disabledDate={date => date < new Date(new Date().setHours(0, 0, 0, 0))}
-        />
+        <Calendar bordered onSelect={handleDateSelect} disabledDate={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))} />
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -64,56 +69,46 @@ export default function App() {
         <Modal.Body>
           <div style={{ textAlign: 'center', justifyContent: 'center' }}>
             <p>วันที่: {selectedDate ? selectedDate.toLocaleDateString() : ''}</p>
-            <input 
-              type="text" 
-              placeholder="ชื่อ" 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
-              style={{ width: '300px' }} 
-            />
+            <input type="text" placeholder="ชื่อ" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '300px' }} />
             <br />
             <br />
-            <input 
-              type="text" 
-              placeholder="เบอร์โทรศัพท์" 
-              value={phone} 
-              onChange={(e) => setPhone(e.target.value)} 
-              style={{ width: '300px' }} 
-            />
-            <br />
-            <br />
-            <input 
-              type="text" 
-              placeholder="ชื่อสัตว์" 
-              value={petName} 
-              onChange={(e) => setPetName(e.target.value)} 
-              style={{ width: '300px' }} 
-            />
-            <br />
-            <br />
-            <select 
-              value={purpose} 
-              onChange={(e) => setPurpose(e.target.value)} 
+            <input
+              type="text"
+              placeholder="เบอร์โทรศัพท์"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               style={{ width: '300px' }}
-            >
-              <option value="" disabled>ประเภทการจอง</option>
+            />
+            <br />
+            <br />
+            <input
+              type="text"
+              placeholder="ชื่อสัตว์"
+              value={petName}
+              onChange={(e) => setPetName(e.target.value)}
+              style={{ width: '300px' }}
+            />
+            <br />
+            <br />
+            <select value={purpose} onChange={(e) => setPurpose(e.target.value)} style={{ width: '300px' }}>
+              <option value="" disabled>
+                ประเภทการจอง
+              </option>
               <option value="ฉีดวักซีน">ฉีดวักซีน</option>
               <option value="ฉีดยา">ฉีดยา</option>
               <option value="ตรวจร่างกาย">ตรวจร่างกาย</option>
-              {/* Add more options as needed */}
             </select>
             <br />
             <br />
-            <textarea 
-              placeholder="หมายเหตุ" 
-              value={note} 
-              onChange={(e) => setNote(e.target.value)} 
-              style={{ width: '300px', height: '100px' }} 
+            <textarea
+              placeholder="หมายเหตุ"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              style={{ width: '300px', height: '100px' }}
               maxLength="150"
             />
           </div>
         </Modal.Body>
-
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

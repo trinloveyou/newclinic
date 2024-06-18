@@ -18,6 +18,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const AuthRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -38,13 +39,16 @@ const AuthRegister = () => {
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          name: Yup.string().max(255).required('Name is required'),
-          numphone: Yup.string().max(10).required('Phone number is required'),
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          password: Yup.string().max(255).required('Password is required'),
+          name: Yup.string().matches(/^\D*$/, 'ชื่อต้องประกอบด้วยตัวอักษรเท่านั้น').max(255).required('จำเป็นต้องใส่ชื่อ'),
+          numphone: Yup.string()
+            .matches(/^[0-9]*$/, 'หมายเลขเบอร์โทรศัพท์ต้องประกอบด้วยตัวเลขเท่านั้น')
+            .max(10)
+            .required('จำเป็นต้องใส่หมายเลขเบอร์โทรศัพท์'),
+          email: Yup.string().email('ต้องเป็นรูปแบบอีเมลที่ถูกต้อง').max(255).required('จำเป็นต้องใส่อีเมล'),
+          password: Yup.string().max(255).required('จำเป็นต้องใส่รหัสผ่าน'),
           confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Confirm password is required')
+            .oneOf([Yup.ref('password'), null], 'รหัสผ่านต้องตรงกัน')
+            .required('จำเป็นต้องใส่รหัสผ่าน')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
@@ -69,11 +73,11 @@ const AuthRegister = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="name-signup"> Name</InputLabel>
+                  <InputLabel htmlFor="name-signup">ชื่อ</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    id="name-login"
-                    type="name"
+                    id="name-signup"
+                    type="text"
                     value={values.name}
                     name="name"
                     onBlur={handleBlur}
@@ -91,17 +95,17 @@ const AuthRegister = () => {
 
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="numphone-signup">Phone Number</InputLabel>
+                  <InputLabel htmlFor="numphone-signup">เบอร์โทรศัพท์</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.numphone && errors.numphone)}
                     id="numphone-signup"
+                    type="text"
                     value={values.numphone}
                     name="numphone"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="0895636594"
-                    inputProps={{}}
+                    error={Boolean(touched.numphone && errors.numphone)}
                   />
                   {touched.numphone && errors.numphone && (
                     <FormHelperText error id="helper-text-numphone-signup">
@@ -110,20 +114,20 @@ const AuthRegister = () => {
                   )}
                 </Stack>
               </Grid>
+
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-signup">Email Address</InputLabel>
+                  <InputLabel htmlFor="email-signup">อีเมล</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.email && errors.email)}
-                    id="email-login"
+                    id="email-signup"
                     type="email"
                     value={values.email}
                     name="email"
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="demo@gmail.com"
-                    inputProps={{}}
+                    error={Boolean(touched.email && errors.email)}
                   />
                   {touched.email && errors.email && (
                     <FormHelperText error id="helper-text-email-signup">
@@ -132,20 +136,19 @@ const AuthRegister = () => {
                   )}
                 </Stack>
               </Grid>
+
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="password-signup">Password</InputLabel>
+                  <InputLabel htmlFor="password-signup">รหัสผ่าน</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.password && errors.password)}
                     id="password-signup"
                     type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"
                     onBlur={handleBlur}
-                    onChange={(e) => {
-                      handleChange(e);
-                    }}
+                    onChange={handleChange}
+                    placeholder="******"
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -153,14 +156,12 @@ const AuthRegister = () => {
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
-                          size="large"
                         >
                           {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                       </InputAdornment>
                     }
-                    placeholder="******"
-                    inputProps={{}}
+                    error={Boolean(touched.password && errors.password)}
                   />
                   {touched.password && errors.password && (
                     <FormHelperText error id="helper-text-password-signup">
@@ -172,16 +173,16 @@ const AuthRegister = () => {
 
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="confirm-password-signup">Confirm Password</InputLabel>
+                  <InputLabel htmlFor="confirmPassword-signup">ยืนยันรหัสผ่าน</InputLabel>
                   <OutlinedInput
                     fullWidth
-                    error={Boolean(touched.confirmPassword && errors.confirmPassword)}
-                    id="confirm-password-signup"
+                    id="confirmPassword-signup"
                     type={showPassword ? 'text' : 'password'}
                     value={values.confirmPassword}
                     name="confirmPassword"
                     onBlur={handleBlur}
                     onChange={handleChange}
+                    placeholder="******"
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -189,17 +190,15 @@ const AuthRegister = () => {
                           onClick={handleClickShowPassword}
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
-                          size="large"
                         >
                           {showPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                         </IconButton>
                       </InputAdornment>
                     }
-                    placeholder="******"
-                    inputProps={{}}
+                    error={Boolean(touched.confirmPassword && errors.confirmPassword)}
                   />
                   {touched.confirmPassword && errors.confirmPassword && (
-                    <FormHelperText error id="helper-text-confirm-password-signup">
+                    <FormHelperText error id="helper-text-confirmPassword-signup">
                       {errors.confirmPassword}
                     </FormHelperText>
                   )}
@@ -211,10 +210,11 @@ const AuthRegister = () => {
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
               )}
+
               <Grid item xs={12}>
                 <AnimateButton>
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Create Account
+                    สร้างบัญชีใหม่
                   </Button>
                 </AnimateButton>
               </Grid>

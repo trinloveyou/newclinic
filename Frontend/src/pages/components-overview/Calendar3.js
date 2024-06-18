@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePicker from 'react-horizontal-datepicker';
-import './Calender.css';
+// import "./Calender.css";
 
 export default function App() {
   const selectedDay = (val) => {

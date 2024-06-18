@@ -5,10 +5,10 @@ import 'react-horizontal-strip-datepicker/dist/ReactHorizontalDatePicker.css';
 
 const Calender4 = () => {
   const onSelectedDay = (d) => {
-    console.log(d);
+    console.log('allo', d);
   };
 
-  return <ReactHorizontalDatePicker selectedDay={onSelectedDay} enableScroll={true} enableDays={15} color={'#987876'} />;
+  return <ReactHorizontalDatePicker selectedDay={onSelectedDay} enableScroll={true} enableDays={180} color={'#987876'} />;
 };
 
 export default Calender4;

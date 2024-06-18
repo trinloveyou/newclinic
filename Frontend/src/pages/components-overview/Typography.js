@@ -5,7 +5,7 @@ import './styles.css';
 export default function Typohraphy() {
   return (
     <div className="Typohraphy">
-      <h1>Hello Sirawittop</h1>
+      <h1>จองคิวรักษาสัตว์</h1>
       {/* <FullCalendarApp /> */}
       <Canlender4 />
     </div>

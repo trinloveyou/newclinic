@@ -25,7 +25,7 @@ function FullCalendarApp() {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        // initialView="basicWeek"
+        //initialView="basicWeek"
         headerToolbar={{
           center: 'dayGridMonth,timeGridWeek,timeGridDay new'
         }}

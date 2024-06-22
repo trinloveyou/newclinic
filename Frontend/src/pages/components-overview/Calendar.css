@@ -1,35 +1,20 @@
-._node_modules_react_horizontal_datepicker_dist_DatePicker_module__button,
-.datepicker-button-next {
-  background: white;
-  color: grey;
+/* Calendar.css (หรือไฟล์ CSS ที่คุณใช้) */
+.main-container {
+  background-color: #f0f0f0; /* กำหนดสีเทาให้เป็นพื้นหลัง */
+  padding: 20px; /* เพิ่ม padding เพื่อให้มีขอบรอบสำหรับเนื้อหาภายใน */
+  margin: auto; /* จัดให้ตำแหน่งตรงกลาง */
+  width: 80%; /* กำหนดความกว้างของ container */
+  max-width: 800px; /* กำหนดความกว้างสูงสุด */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเพื่อเน้น container */
+  border-radius: 8px; /* กำหนดขอบมน */
+  text-align: center; /* จัดเนื้อหาภายในตรงกลาง */
 }
 
-._node_modules_react_horizontal_datepicker_dist_DatePicker_module__dateDayItem {
-  background: #ffe5e5;
-  border-radius: 8px;
-  color: #000000;
-  border: none;
+.main-container h1 {
+  font-size: 2rem; /* กำหนดขนาดตัวอักษรของหัวข้อ */
+  color: #333; /* กำหนดสีของตัวหนังสือ */
+  margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่างของหัวข้อ */
 }
-
-._node_modules_react_horizontal_datepicker_dist_DatePicker_module__monthYearLabel {
-  display: none;
-}
-
-.datepicker-date-day-Item:hover {
-  background: #ffe5e5;
-  border-radius: 8px;
-  color: #000000;
-}
-
-.datepicker {
-  margin: 0px 12px 12px 12px;
-}
-
 .wrapper {
-  margin-left: 20px;
-}
-
-.blank-space-div,
-.scroll-head {
-  display: none;
+  margin-left: 15px;
 }

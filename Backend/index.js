@@ -278,3 +278,9 @@ app.put("/api/editpassword", async (req, res) => {
     });
   }
 });
+app.get("/api/timeslots", async (req, res) => {
+  const [results] = await conn.query(
+    'SELECT * FROM timeslots WHERE status = "available"'
+  );
+  res.json({ clinic: results });
+});

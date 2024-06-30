@@ -280,7 +280,7 @@ app.put("/api/editpassword", async (req, res) => {
 });
 app.get("/api/timeslots", async (req, res) => {
   const [results] = await conn.query(
-    'SELECT * FROM timeslots WHERE status = "available"'
+    "SELECT id, monday_open, monday_close FROM timeslots"
   );
   res.json({ clinic: results });
 });

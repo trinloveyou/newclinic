@@ -1,72 +1,73 @@
 import React, { useState } from 'react';
-import { Container, Typography, Grid, Button, TextField } from '@mui/material';
-import Canlender4 from './Calendar4';
+import { Container, Typography as MuiTypography, Grid, Button } from '@mui/material';
+import Calendar4 from './Calendar4';
 import './Calendar.css';
 
-export default function AppointmentBooking() {
-  const [customerName, setCustomerName] = useState('');
-  const [petName, setPetName] = useState('');
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+const TypographyPage = () => {
+  const [selectedDay, setSelectedDay] = useState('Monday'); // State เก็บวันที่ที่เลือก
 
-  // ตัวอย่างข้อมูลช่วงเวลาที่สามารถจองได้ (ซึ่งจะต้องดึงจาก API จริงในการใช้งานจริง)
-  const timeSlots = [
-    { id: '1', startTime: '09:00', endTime: '09:30' },
-    { id: '2', startTime: '09:30', endTime: '10:00' },
-    { id: '3', startTime: '10:00', endTime: '10:30' }
-    // เพิ่มข้อมูลช่วงเวลาที่เหลือตามต้องการ
-  ];
+  const timeSlots = {
+    Monday: ['09:00-10:00', '10:00-11:00', '14:00-15:00'],
+    Tuesday: ['09:00-10:00', '11:00-12:00', '13:00-14:00'],
+    Wednesday: ['10:00-11:00', '12:00-13:00', '15:00-16:00'],
+    Thursday: ['08:00-09:00', '10:00-11:00', '13:00-14:00'],
+    Friday: ['09:00-10:00', '11:00-12:00', '14:00-15:00']
+  };
 
   const handleBooking = () => {
-    // ตัวอย่างการส่งข้อมูลการจอง (จะต้องเชื่อมต่อ API จริงในการใช้งานจริง)
-    console.log(`Booking appointment for ${customerName} with pet ${petName} at time slot ${selectedTimeSlot}`);
-    // ส่วนการเชื่อมต่อ API จะต้องเขียนเพิ่มเอง
+    // ตรงนี้จะเขียนโค้ด Logic สำหรับการจอง
+    console.log(`Booking slot for ${selectedDay}`);
   };
+
+  console.log('timeSlots', timeSlots);
 
   return (
     <Container maxWidth="md">
-      <Typography variant="h3" align="center" gutterBottom>
+      <MuiTypography variant="h3" align="center" gutterBottom>
         จองคิวรักษาสัตว์
-      </Typography>
+      </MuiTypography>
       <div className="main-container">
-        <Canlender4 />
+        <Calendar4 timeSlots={timeSlots} />
       </div>
       <div className="secondary-container">
-        <Typography variant="h4" gutterBottom>
+        <MuiTypography variant="h4" gutterBottom>
           เลือกช่วงเวลา
-        </Typography>
-        <Grid container spacing={2}>
-          {timeSlots.map((slot) => (
-            <Grid item key={slot.id} xs={12} sm={4}>
-              <Button
-                variant="contained"
-                color="primary"
-                className="time-slot-button"
-                onClick={() => setSelectedTimeSlot(slot.id)}
-                disabled={selectedTimeSlot === slot.id}
-              >
-                {`${slot.startTime} - ${slot.endTime}`}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-        <Typography variant="h4" gutterBottom>
+        </MuiTypography>
+        <div>
+          {/* เพิ่มเลือกวันที่ไว้ที่นี่ */}
+          <div style={{ marginBottom: '1rem' }}>
+            <MuiTypography variant="subtitle1" gutterBottom>
+              เลือกวันที่:
+            </MuiTypography>
+            <Button variant="outlined" onClick={() => setSelectedDay('Monday')} style={{ marginRight: '1rem' }}>
+              จันทร์
+            </Button>
+            <Button variant="outlined" onClick={() => setSelectedDay('Tuesday')} style={{ marginRight: '1rem' }}>
+              อังคาร
+            </Button>
+            <Button variant="outlined" onClick={() => setSelectedDay('Wednesday')} style={{ marginRight: '1rem' }}>
+              พุธ
+            </Button>
+            <Button variant="outlined" onClick={() => setSelectedDay('Thursday')} style={{ marginRight: '1rem' }}>
+              พฤหัสบดี
+            </Button>
+            <Button variant="outlined" onClick={() => setSelectedDay('Friday')} style={{ marginRight: '1rem' }}>
+              ศุกร์
+            </Button>
+          </div>
+          <h2>{selectedDay}</h2>
+          <ul>
+            {timeSlots[selectedDay].map((slot, index) => (
+              <li key={index}>{slot}</li>
+            ))}
+          </ul>
+        </div>
+        <MuiTypography variant="h4" gutterBottom>
           รายละเอียดการจอง
-        </Typography>
+        </MuiTypography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="ชื่อลูกค้า"
-              variant="outlined"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label="ชื่อสัตว์เลี้ยง" variant="outlined" value={petName} onChange={(e) => setPetName(e.target.value)} />
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="contained" color="primary" onClick={handleBooking} disabled={!customerName || !petName || !selectedTimeSlot}>
+            <Button variant="contained" color="primary" onClick={handleBooking}>
               จอง
             </Button>
           </Grid>
@@ -74,4 +75,6 @@ export default function AppointmentBooking() {
       </div>
     </Container>
   );
-}
+};
+
+export default TypographyPage;

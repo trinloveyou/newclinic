@@ -115,7 +115,6 @@ app.get("/api/users", async (req, res) => {
     if (authHeader) {
       authToken = authHeader.split(" ")[1];
     }
-    console.log("authToken", authToken);
     const user = jwt.verify(authToken, secret);
 
     const [checkResults] = await conn.query(
@@ -166,7 +165,6 @@ app.get("/api/usertoken", async (req, res) => {
     if (authHeader) {
       authToken = authHeader.split(" ")[1];
     }
-    console.log("authToken", authToken);
     const user = jwt.verify(authToken, secret);
 
     const [checkResults] = await conn.query(
@@ -203,7 +201,6 @@ app.put("/api/editprofile", async (req, res) => {
     if (authHeader) {
       authToken = authHeader.split(" ")[1];
     }
-    console.log("authToken", authToken);
     const user = jwt.verify(authToken, secret);
 
     const [checkResults] = await conn.query(
@@ -246,7 +243,6 @@ app.put("/api/editpassword", async (req, res) => {
       "SELECT * FROM users where email = ?",
       user.email
     );
-    console.log("checkResults", checkResults);
 
     if (!checkResults[0]) {
       throw { message: "user not found" };
@@ -283,4 +279,23 @@ app.get("/api/timeslots", async (req, res) => {
     "SELECT id, monday_open, monday_close FROM timeslots"
   );
   res.json({ clinic: results });
+});
+// post api for booking time
+app.post("/api/booking", async (req, res) => {
+  const { name, email, phone, date, time, type } = req.body;
+  try {
+    const [results] = await conn.query(
+      "INSERT INTO reservationqueue ( name,numphone	,  email, dataday, time, reservation_type	) VALUES ( ?, ?, ?, ?, ?, ?)",
+      [name, email, phone, date, time, type]
+    );
+    res.json({
+      message: "booking success",
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(403).json({
+      message: "booking fail",
+      error,
+    });
+  }
 });
